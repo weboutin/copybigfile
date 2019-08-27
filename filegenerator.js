@@ -5,7 +5,7 @@ const path = require('path');
 const filesize = process.env.filesize || 1024
 const outputname = process.env.outputname || 'defaultbigfile'
 
-console.log("filesize : " + filesize);
+console.log("filesize : " + filesize + "mb");
 console.log("outputname : " + outputname);
 
 //文件路径
