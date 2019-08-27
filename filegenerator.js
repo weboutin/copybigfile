@@ -1,10 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-//单位1mb
-const filesize = 1024;
+//默认1024mb
+const filesize = process.env.filesize || 1024
+const outputname = process.env.outputname || 'defaultbigfile'
 
-const bigfilename = path.join(__dirname, 'bigfiles/bigfile');
+console.log("filesize : " + filesize);
+console.log("outputname : " + outputname);
+
+//文件路径
+const bigfilename = path.join(__dirname, `bigfiles/${outputname}`);
 
 //初始化大文件
 fs.writeFileSync(bigfilename, "");
