@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 //默认1024mb
-const filesize = process.env.filesize || 1024
-const outputname = process.env.outputname || 'defaultbigfile'
+const filesize = process.env.fz || 1024
+const outputname = process.env.output || 'defaultbigfile'
 
-console.log("filesize : " + filesize + "mb");
-console.log("outputname : " + outputname);
+console.log("fz : " + filesize + "mb");
+console.log("output : " + outputname);
 
 //文件路径
 const bigfilename = path.join(__dirname, `bigfiles/${outputname}`);
@@ -24,8 +24,9 @@ for (let i = 0; i < (1024 * 1024); i++) {
 
 for (let i = 0; i < filesize; i++) {
   fs.appendFileSync(bigfilename, onemstr, () => { });
+  console.log(new Date().getTime() + ' 1m append ..')
 }
 
 const endTime = new Date().getTime()
 
-console.log('use : ' + (endTime - startTime))
+console.log('used : ' + (endTime - startTime))
