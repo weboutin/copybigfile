@@ -1,22 +1,30 @@
 const fs = require('fs')
 const path = require('path');
 
-const input = process.env.input
-const output = process.env.output || 'defaultoutputfile'
 
-function main() {
-  if (!input) {
-    throw new Error("Please enter input and output filename");
-  }
-  const startTime = new Date().getTime();
-  const bigfile = path.join(__dirname, `../bigfiles/${input}`)
-  const copyfile = path.join(__dirname, `../copyfiles/${output}`)
-  console.log('copy start ..')
-  fs.copyFileSync(bigfile, copyfile);
-  const endTime = new Date().getTime();
-  console.log('used : ' + (endTime - startTime))
+async function main(input, output) {
+  return new Promise((resolve, reject) => {
+    try {
+
+      const startTime = new Date().getTime();
+      const bigfile = path.join(__dirname, `../bigfiles/${input}`)
+      const copyfile = path.join(__dirname, `../copyfiles/${output}`)
+      console.log('v3 copy start ..')
+      fs.copyFileSync(bigfile, copyfile);
+      const endTime = new Date().getTime();
+      const used = endTime - startTime
+      resolve({
+        used
+      })
+    } catch (e) {
+      console.log(e)
+      reject({
+        error: e
+      })
+    }
+  })
 }
 
-main();
 
+module.exports = main;
 
